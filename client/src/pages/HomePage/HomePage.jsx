@@ -1,3 +1,4 @@
+import TripForm from "../../components/TripForm/TripForm";
 import "./HomePage.scss";
 
 const HomePage = () => {

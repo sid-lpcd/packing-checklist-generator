@@ -19,7 +19,6 @@ function App() {
 
   return (
     <>
-      const [isDarkMode, setIsDarkMode] = useState(false);
       <Header
         user={user}
         onLogout={handleLogout}
