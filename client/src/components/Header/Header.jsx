@@ -2,10 +2,10 @@ import "./Header.scss";
 
 const Header = ({ user, onLogout, isDarkMode, toggleTheme }) => {
   return (
-    <header className="header">
+    <header className={`header ${isDarkMode ? "dark" : ""}`}>
       <div className="header-container">
-        <h2>Packing List Generator</h2>
-        <div>
+        <h2 className="header__title">Packing List Generator</h2>
+        <div className="header__user">
           <div
             className={`header__toggle-container ${
               isDarkMode ? "dark" : "light"
@@ -31,14 +31,23 @@ const Header = ({ user, onLogout, isDarkMode, toggleTheme }) => {
           {user ? (
             <div className="header__user-info">
               <span>Welcome, {user.name}</span>
-              <button onClick={onLogout}>Logout</button>
+              <button
+                className={`header__logout ${isDarkMode ? "dark" : "light"}`}
+                onClick={onLogout}
+              >
+                Logout
+              </button>
             </div>
           ) : (
             <div className="header__auth-buttons">
-              <button onClick={() => alert("Login functionality coming soon!")}>
+              <button
+                className={`header__login ${isDarkMode ? "dark" : "light"}`}
+                onClick={() => alert("Login functionality coming soon!")}
+              >
                 Login
               </button>
               <button
+                className={`header__sign-up ${isDarkMode ? "dark" : "light"}`}
                 onClick={() => alert("Signup functionality coming soon!")}
               >
                 Sign Up

@@ -2,6 +2,33 @@
 @use "../../styles/partials/variables" as *;
 
 .header {
+  background-color: $primary-background-color;
+  color: $primary-color;
+  padding: $min-padding calc($min-padding * 2);
+  box-shadow: $shadow-dark;
+  @include flex(center);
+  &.dark {
+    background-color: $light-color;
+    color: $dark-color;
+  }
+
+  &-container {
+    max-width: 1200px;
+    width: 100%;
+    @include flex(space-between);
+  }
+
+  &__title {
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  &__user {
+    @include flex(start);
+    flex-direction: column;
+    gap: $min-padding;
+  }
+
   &__toggle-container {
     @include flex(center);
     gap: $min-padding;
@@ -17,8 +44,8 @@
     width: 2.2rem;
     height: calc(1rem + $min-padding);
     border-radius: $border-radius;
-    border: 1px solid $dark-color;
-    box-shadow: $shadow-dark;
+    border: 1px solid $light-color;
+    box-shadow: $shadow-light;
     transition: background-color $transition-speed;
 
     &:focus {
@@ -26,8 +53,8 @@
     }
 
     &.dark {
-      box-shadow: $shadow-light;
-      border: 1px solid $light-color;
+      box-shadow: $shadow-dark;
+      border: 1px solid $dark-color;
     }
   }
   &__toggle-circle {
@@ -36,13 +63,13 @@
     left: 3px;
     width: 1rem;
     height: 1rem;
-    background-color: $dark-color;
+    background-color: $light-color;
     border-radius: 50%;
     transition: transform $transition-speed;
 
     &.dark {
       transform: translateX(0.8rem);
-      background-color: $light-color;
+      background-color: $dark-color;
     }
 
     &.light {
@@ -51,7 +78,60 @@
   }
 
   &__mode-text {
-    font-size: 1rem;
+    font-size: 0.7rem;
     font-weight: 600;
+  }
+
+  &__user-info {
+    @include flex(center);
+    gap: $min-padding;
+  }
+
+  &__logout {
+    background-color: $secondary-btn-background;
+    color: $primary-btn-color;
+
+    &:hover {
+      background-color: $secondary-btn-hover;
+    }
+  }
+
+  &__auth-buttons {
+    @include flex(start);
+    gap: 1rem;
+  }
+
+  &__login,
+  &__sign-up {
+    padding: $min-padding;
+    background-color: transparent;
+    color: $primary-color;
+    outline: none;
+    border: 0;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &.dark {
+      color: $dark-color;
+    }
+  }
+  &__sign-up {
+    border: 1px solid $light-color;
+    border-radius: $border-radius;
+
+    &:hover {
+      background-color: $secondary-btn-hover;
+    }
+
+    &.dark {
+      border: 1px solid $dark-color;
+
+      &:hover {
+        background-color: $border-color;
+      }
+    }
   }
 }
