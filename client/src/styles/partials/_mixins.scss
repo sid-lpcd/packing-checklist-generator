@@ -1,0 +1,113 @@
+@use "./variables" as *;
+@use "./animations" as *;
+
+@mixin tablet {
+  @media screen and (min-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media screen and (min-width: $desktop-breakpoint) {
+    @content;
+  }
+}
+
+@mixin flex($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin background-center-img($url, $contain: unset) {
+  background-image: url($url);
+  background-position: center;
+  background-size: $contain;
+  background-repeat: no-repeat;
+}
+
+@mixin btn-styling {
+  background-color: $primary-background-btn-color;
+  color: $primary-btn-color;
+  box-shadow: $shadow-light;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  max-width: 100%;
+  min-width: 7rem;
+  height: 2.5rem;
+  padding: $min-padding;
+  position: relative;
+  overflow: hidden;
+  transition: background-color $transition-speed ease-in-out,
+    box-shadow $transition-speed ease-in-out;
+
+  @include flex(center);
+
+  @include tablet {
+    min-width: 12.5rem;
+  }
+
+  &:hover {
+    background-color: $primary-btn-hover;
+    box-shadow: $shadow-dark;
+  }
+
+  &:active {
+    box-shadow: none;
+    transform: translateY(1px);
+  }
+}
+
+@mixin light-mode {
+  background-color: $primary-color;
+  color: $dark-color;
+  font-family: $body-fonts;
+  box-shadow: $shadow-light;
+
+  *[class*="btn"] {
+    background-color: $primary-btn-background;
+    color: $primary-btn-color;
+    box-shadow: $shadow-light;
+    transition: background-color $transition-speed ease;
+
+    &:hover {
+      background-color: $primary-btn-hover;
+      box-shadow: $shadow-dark;
+    }
+  }
+
+  *[class*="card"],
+  *[class*="modal"] {
+    background-color: $secondary-background-color;
+    color: $dark-color;
+    box-shadow: $shadow-light;
+    border-radius: $border-radius;
+  }
+}
+
+@mixin dark-mode {
+  background-color: $primary-background-color;
+  color: $light-color;
+  font-family: $body-fonts;
+  box-shadow: $shadow-dark;
+
+  *[class*="btn"] {
+    background-color: $secondary-btn-background;
+    color: $secondary-btn-color;
+    box-shadow: $shadow-dark;
+    transition: background-color $transition-speed ease;
+
+    &:hover {
+      background-color: $secondary-btn-hover;
+      box-shadow: $shadow-light; // Softer shadow on hover
+    }
+  }
+
+  *[class*="card"],
+  *[class*="modal"] {
+    background-color: $shade-color;
+    color: $light-color;
+    box-shadow: $shadow-dark;
+    border-radius: $border-radius;
+  }
+}

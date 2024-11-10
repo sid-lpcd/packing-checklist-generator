@@ -1,0 +1,47 @@
+$tablet-breakpoint: 768px;
+$desktop-breakpoint: 1024px;
+
+$primary-color: #f1f5f9; // Light background or text color
+$primary-background-color: #2d3748; // Dark primary background (ideal for headers, footers)
+
+$accent-color: #3182ce; // Accent color for links, buttons
+$highlight-color: #63b3ed; // Light accent for hover or focus states
+
+/** Secondary pallete **/
+
+$secondary-color: #6b46c1; // Secondary elements (e.g., sidebars, secondary buttons)
+$secondary-background-color: #f7fafc; // Light secondary background
+
+$secondary-accent-color: #e53e3e; // Alert or error color
+$secondary-hover-color: #9b2c2c; // Alert or error hover
+
+/** Neutrals **/
+
+$border-color: #cbd5e0; // Border color for inputs, containers
+$border-radius: 12px; // Consistent rounded corners
+
+$light-color: #edf2f7; // Light gray for backgrounds, dividers
+$dark-color: #2d3748; // Dark gray for text, icons
+$shade-color: #4a5568; // Subtle text or icon shading
+
+/** Buttons **/
+
+$primary-btn-color: #ffffff; // Text color for primary buttons
+$primary-btn-background: #3182ce; // Primary button background
+$primary-btn-hover: #2b6cb0; // Primary button hover
+
+$secondary-btn-color: #ffffff; // Text color for secondary buttons
+$secondary-btn-background: #6b46c1; // Secondary button background
+$secondary-btn-hover: #553c9a; // Secondary button hover
+
+/** Shadows **/
+
+$shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1); // Light shadow for raised buttons or cards
+$shadow-dark: 0 6px 12px rgba(0, 0, 0, 0.15); // Darker shadow for modals or overlays
+
+$min-padding: 0.5rem;
+
+$transition-speed: 0.3s;
+
+$title-fonts: "Montserrat", Arial, Helvetica, sans-serif;
+$body-fonts: "Open Sans", Arial, Helvetica, sans-serif;
