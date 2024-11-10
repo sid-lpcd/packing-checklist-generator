@@ -1,42 +1,124 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@use "./styles/partials/fonts";
+@use "./styles/partials/resets";
+@use "./styles/partials/variables" as *;
+@use "./styles/partials/mixins" as *;
+@use "./styles/partials/animations" as *;
+
+html {
+  scroll-behavior: smooth;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
+body,
+input,
+textarea,
+*::placeholder {
+  font-family: $body-fonts;
+  @include light-mode;
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+  &.dark-mode {
+    @include dark-mode;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+/**************** Default Padding Wrapper ******************/
+
+*[class*="wrapper"] {
+  padding: 0 calc($min-padding * 2);
+
+  @include tablet {
+    padding: 0 calc($min-padding * 3);
+  }
+
+  @include desktop {
+    margin: 0 auto;
+    padding: 0 calc($min-padding * 3);
+    max-width: 63.75rem;
   }
 }
 
-.card {
-  padding: 2em;
+/****************** Default Paddings ***************/
+
+h1,
+h2,
+h3 {
+  padding-top: calc($min-padding * 3);
+  padding-bottom: calc($min-padding * 2);
+
+  @include tablet {
+    padding-top: calc($min-padding * 4);
+    padding-bottom: calc($min-padding * 3);
+  }
 }
 
-.read-the-docs {
-  color: #888;
+/***************** FONTS ************************/
+// WordMark
+h1 {
+  font-size: 2rem;
+  line-height: 2rem;
+  font-weight: 400;
+  font-family: $title-fonts;
+
+  @include tablet {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+  }
+}
+
+// Title
+h2 {
+  font-size: 1.625rem;
+  line-height: 2.375rem;
+  font-weight: lighter;
+  font-family: $title-fonts;
+
+  @include tablet {
+    font-size: 3.25rem;
+    line-height: 4.125rem;
+  }
+}
+
+// Heading
+h3 {
+  font-size: 1.125rem;
+  line-height: 1.4375rem;
+  font-weight: 500;
+
+  @include tablet {
+    font-size: 1.5rem;
+    line-height: 1.875rem;
+    font-weight: 500;
+  }
+}
+
+// Body
+body,
+*[class*="btn"],
+button {
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  font-weight: 500;
+
+  @include tablet {
+    font-size: 1.25rem;
+    line-height: 1.625rem;
+  }
+}
+
+*[class*="--small"] {
+  font-size: 0.625rem;
+  line-height: 0.75rem;
+  font-weight: 500;
+
+  @include tablet {
+    font-size: 0.75rem;
+    line-height: 0.9375rem;
+  }
+}
+
+*[class*="label"] {
+  @extend body;
+  @include tablet {
+    font-size: 0.875rem;
+    line-height: 1.0938rem;
+  }
 }
