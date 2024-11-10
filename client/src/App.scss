@@ -13,10 +13,10 @@ textarea,
 *::placeholder {
   font-family: $body-fonts;
   @include light-mode;
+}
 
-  &.dark-mode {
-    @include dark-mode;
-  }
+body.dark-mode {
+  @include dark-mode;
 }
 
 /**************** Default Padding Wrapper ******************/

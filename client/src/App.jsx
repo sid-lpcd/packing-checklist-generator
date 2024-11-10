@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import HomePage from "./pages/HomePage/HomePage";
@@ -7,6 +7,7 @@ import Header from "./components/Header/Header";
 function App() {
   const [user, setUser] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const bodyRef = useRef(document.body);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
@@ -16,6 +17,14 @@ function App() {
     setUser(null); // Log out the user
     alert("You have been logged out!");
   };
+
+  useEffect(() => {
+    if (isDarkMode) {
+      bodyRef.current.classList.add("dark-mode");
+    } else {
+      bodyRef.current.classList.remove("dark-mode");
+    }
+  }, [isDarkMode]);
 
   return (
     <>

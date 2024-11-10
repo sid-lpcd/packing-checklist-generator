@@ -11,7 +11,12 @@ const Header = ({ user, onLogout, isDarkMode, toggleTheme }) => {
               isDarkMode ? "dark" : "light"
             }`}
           >
-            <button className="header__toggle-button" onClick={toggleTheme}>
+            <button
+              className={`header__toggle-button ${
+                isDarkMode ? "dark" : "light"
+              }`}
+              onClick={toggleTheme}
+            >
               <span
                 className={`header__toggle-circle ${
                   isDarkMode ? "dark" : "light"
