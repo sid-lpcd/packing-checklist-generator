@@ -1,0 +1,54 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.header {
+  &__toggle-container {
+    @include flex(center);
+    gap: $min-padding;
+  }
+
+  &__toggle-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    @include flex(center);
+    padding: $min-padding;
+    position: relative;
+    width: 2.2rem;
+    height: calc(1rem + $min-padding);
+    border-radius: $border-radius;
+    box-shadow: $shadow-dark;
+    transition: background-color $transition-speed;
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  &__toggle-circle {
+    position: absolute;
+    top: 4px;
+    left: 3px;
+    width: 1rem;
+    height: 1rem;
+    background-color: $dark-color;
+    border-radius: 50%;
+    transition: transform $transition-speed;
+
+    &.dark {
+      transform: translateX(0.9rem);
+    }
+
+    &.light {
+      transform: translateX(0);
+    }
+  }
+
+  &__mode-text {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+}

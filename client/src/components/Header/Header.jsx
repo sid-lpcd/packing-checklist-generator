@@ -1,3 +1,5 @@
+import "./Header.scss";
+
 const Header = ({ user, onLogout, isDarkMode, toggleTheme }) => {
   return (
     <header className="header">
