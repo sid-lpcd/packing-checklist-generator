@@ -1,8 +1,14 @@
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.scss";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
-  return <></>;
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+    </Routes>
+  );
 }
 
 export default App;
