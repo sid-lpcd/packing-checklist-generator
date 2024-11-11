@@ -32,11 +32,6 @@ jobs:
           cd ../server
           npm install   # This installs server-side dependencies
 
-      # Ensure Vite is available before building
-      - name: Install Vite globally
-        run: |
-          npm install -g vite
-
       # Build client and server (this step will wait until the previous steps are done)
       - name: Build client and server
         run: |
