@@ -1,4 +1,4 @@
-name: Example Workflow
+name: Deploy Fullstack App
 
 on:
   push:
@@ -9,26 +9,52 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
+    env:
+      NODE_ENV: production
+      HUGGINGFACE_API_KEY: ${{ secrets.HUGGINGFACE_API_KEY }}
+      OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '14'
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-    - name: Install dependencies
-      run: npm install
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "14"
 
-    - name: Set up environment variables
-      env:
-        HUGGINGFACE_API_KEY: ${{ secrets.HUGGINGFACE_API_KEY }}
-        OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-      run: |
-        echo "HUGGINGFACE_API_KEY=$HUGGINGFACE_API_KEY" >> $GITHUB_ENV
-        echo "OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY" >> $GITHUB_ENV
+      - name: Install dependencies for client and server
+        run: |
+          cd client
+          npm install
+          cd ../server
+          npm install
 
-    - name: Run your script
-      run: node server/index.js
+      - name: Build client and server
+        run: |
+          cd client
+          npm run build
+          cd ../server
+          npm run build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: client-build
+          path: client/builds
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: client-build
+          path: ./client/build
+
+      - name: Deploy to Hosting Service (e.g., Heroku, DigitalOcean)
+        run: |
+          # Replace this with your deployment commands, e.g., Heroku CLI or other hosting service
+          # e.g., heroku deploy:remote
