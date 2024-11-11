@@ -26,15 +26,19 @@ jobs:
 
       - name: Install dependencies for client and server
         run: |
+          # Install dependencies for client
           cd client
           npm install
+          # Install dependencies for server
           cd ../server
           npm install
 
       - name: Build client and server
         run: |
+          # Build the client app
           cd client
           npm run build
+          # Build the server app (if necessary)
           cd ../server
           npm run build
 
@@ -42,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: client-build
-          path: client/builds
+          path: client/build
 
   deploy:
     needs: build
