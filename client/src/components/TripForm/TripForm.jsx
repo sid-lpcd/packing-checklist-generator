@@ -5,7 +5,7 @@ const TripForm = ({ onSubmit }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [tripDetails, setTripDetails] = useState({
     location: "",
-    duration: "",
+    duration: 1,
     climate: "",
     month: "",
   });
@@ -34,6 +34,13 @@ const TripForm = ({ onSubmit }) => {
     }
   };
 
+  const handleDaysChange = (increment) => {
+    setTripDetails({
+      ...tripDetails,
+      duration: Math.max(1, tripDetails.duration + increment), // Keep days at minimum 1
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(tripDetails);
@@ -55,38 +62,51 @@ const TripForm = ({ onSubmit }) => {
           placeholder="Enter your destination"
           required
         />
-        {suggestions.length > 0 && (
-          <ul className="trip-form__suggestions">
-            {suggestions.map((suggestion, index) => (
-              <li
-                key={index}
-                onClick={() => {
-                  setTripDetails({ ...tripDetails, location: suggestion });
-                  setSuggestions([]);
-                }}
-                className="trip-form__suggestion-item"
-              >
-                {suggestion}
-              </li>
-            ))}
-          </ul>
-        )}
       </div>
+      {suggestions.length > 0 && (
+        <ul className="trip-form__suggestions">
+          {suggestions.map((suggestion, index) => (
+            <li
+              key={index}
+              onClick={() => {
+                setTripDetails({ ...tripDetails, location: suggestion });
+                setSuggestions([]);
+              }}
+              className="trip-form__suggestion-item"
+            >
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className="trip-form__field">
         <label className="trip-form__label" htmlFor="duration">
           Duration (days)
         </label>
-        <input
-          className="trip-form__input"
-          type="number"
-          id="duration"
-          name="duration"
-          value={tripDetails.duration}
-          onChange={handleChange}
-          placeholder="Enter the number of days"
-          required
-        />
+        <div className="trip-form__days-input">
+          <button
+            type="button"
+            onClick={() => handleDaysChange(-1)}
+            className="trip-form__btn-days trip-form__btn-days--decrease"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            id="days"
+            value={tripDetails.duration}
+            readOnly
+            className="trip-form__days-count"
+          />
+          <button
+            type="button"
+            onClick={() => handleDaysChange(1)}
+            className="trip-form__btn-days trip-form__btn-days--increase"
+          >
+            +
+          </button>
+        </div>
       </div>
 
       <div className="trip-form__field">
@@ -125,7 +145,7 @@ const TripForm = ({ onSubmit }) => {
         </select>
       </div>
 
-      <button type="submit" className="trip-form__btn">
+      <button type="submit" className="trip-form__submit">
         Generate Packing List
       </button>
     </form>
