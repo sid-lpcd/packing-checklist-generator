@@ -3,13 +3,24 @@ import { getSuggestions } from "../utils/apiWeather.js";
 const router = express.Router();
 
 // POST /api/trips - Create a new trip and generate packing list
-router.post("/", (req, res) => {
-  // Logic to create a new trip and generate a packing list
-  // ... (Access trip details from req.body)
-  // ... (Generate packing list)
-  // ... (Save trip and packing list to database)
+router.post("/", async (req, res) => {
+  const { location, duration, month } = req.body;
 
-  res.status(201).json({ message: "Trip created and packing list generated" });
+  // Basic validation
+  if (!location || !duration || !month) {
+    return res.status(400).json({ error: "All fields are required" });
+  }
+
+  try {
+    // Logic to generate packing list based on trip details
+    const packingList = await generatePackingList(location, duration, month);
+
+    // Return the generated packing list
+    res.status(201).json({ packingList });
+  } catch (error) {
+    console.error("Error generating packing list:", error);
+    res.status(500).json({ error: "Failed to generate packing list" });
+  }
 });
 
 // GET /api/trips/:tripId - Retrieve packing list for a specific trip

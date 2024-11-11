@@ -7,7 +7,6 @@ const TripForm = ({ onSubmit, isDarkMode }) => {
   const [tripDetails, setTripDetails] = useState({
     location: "",
     duration: 1,
-    climate: "",
     month: "",
   });
 
@@ -17,7 +16,6 @@ const TripForm = ({ onSubmit, isDarkMode }) => {
       const response = await axios.get(
         `http://localhost:3000/api/trip/location-suggestions?query=${query}`
       );
-      console.log(response);
       setSuggestions(response.data);
     } catch (error) {
       console.error("Error fetching location suggestions:", error);
