@@ -31,4 +31,4 @@ jobs:
         echo "OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY" >> $GITHUB_ENV
 
     - name: Run your script
-      run: node your-script.js
+      run: node index.js
