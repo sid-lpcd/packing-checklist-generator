@@ -1,4 +1,4 @@
-name: Example Workflow
+ver/name: Example Workflow
 
 on:
   push:
@@ -31,4 +31,4 @@ jobs:
         echo "OPENWEATHER_API_KEY=$OPENWEATHER_API_KEY" >> $GITHUB_ENV
 
     - name: Run your script
-      run: node index.js
+      run: node server/index.js
