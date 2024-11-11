@@ -1,5 +1,6 @@
 import "./TripForm.scss";
 import { useState } from "react";
+import axios from "axios";
 
 const TripForm = ({ onSubmit, isDarkMode }) => {
   const [suggestions, setSuggestions] = useState([]);
@@ -13,11 +14,11 @@ const TripForm = ({ onSubmit, isDarkMode }) => {
   const fetchSuggestions = async (query) => {
     if (query.length < 3) return;
     try {
-      // const response = await axios.get(
-      //   `/api/location-suggestions?query=${query}`
-      // );
-      // setSuggestions(response.data.suggestions);
-      setSuggestions(["Porto, Portugal", "Portugal", "Poland"]);
+      const response = await axios.get(
+        `http://localhost:3000/api/trip/location-suggestions?query=${query}`
+      );
+      console.log(response);
+      setSuggestions(response.data);
     } catch (error) {
       console.error("Error fetching location suggestions:", error);
     }
