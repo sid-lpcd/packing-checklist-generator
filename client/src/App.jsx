@@ -35,7 +35,7 @@ function App() {
         toggleTheme={toggleTheme}
       />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage isDarkMode={isDarkMode} />} />
       </Routes>
     </>
   );

@@ -5,12 +5,24 @@
   @include flex(start);
   flex-direction: column;
   gap: 1.5rem;
-  max-width: 80%;
-  margin: 0 auto;
+
   padding: calc($min-padding * 2);
   background-color: $secondary-background-color;
   box-shadow: $shadow-light;
   border-radius: $border-radius;
+
+  @include tablet {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  &.dark {
+    background-color: $dark-color;
+
+    .trip-form__label {
+      color: $light-color;
+    }
+  }
 
   &__field {
     @include flex(space-between);
@@ -26,8 +38,9 @@
 
   &__label {
     font-size: 0.8rem;
-    font-weight: bold;
     color: $dark-color;
+    background-color: transparent;
+    box-shadow: none;
   }
 
   &__input,
@@ -61,6 +74,7 @@
 
   &__suggestion-item {
     padding: $min-padding;
+    color: $dark-color;
 
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -104,16 +118,12 @@
     cursor: pointer;
     transition: background-color $transition-speed;
 
-    &--decrease {
-      background-color: $secondary-accent-color;
-    }
-
     &:hover {
       background-color: $primary-btn-hover;
     }
   }
 
-  &__submit {
+  &__btn-submit {
     @include btn-styling;
   }
 }

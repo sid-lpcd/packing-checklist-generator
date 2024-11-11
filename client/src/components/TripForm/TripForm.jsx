@@ -1,7 +1,7 @@
 import "./TripForm.scss";
 import { useState } from "react";
 
-const TripForm = ({ onSubmit }) => {
+const TripForm = ({ onSubmit, isDarkMode }) => {
   const [suggestions, setSuggestions] = useState([]);
   const [tripDetails, setTripDetails] = useState({
     location: "",
@@ -47,7 +47,10 @@ const TripForm = ({ onSubmit }) => {
   };
 
   return (
-    <form className="trip-form" onSubmit={handleSubmit}>
+    <form
+      className={`trip-form ${isDarkMode ? "dark" : ""}`}
+      onSubmit={handleSubmit}
+    >
       <div className="trip-form__field">
         <label className="trip-form__label" htmlFor="location">
           Location
@@ -88,7 +91,7 @@ const TripForm = ({ onSubmit }) => {
           <button
             type="button"
             onClick={() => handleDaysChange(-1)}
-            className="trip-form__btn-days trip-form__btn-days--decrease"
+            className="trip-form__btn-days"
           >
             -
           </button>
@@ -102,7 +105,7 @@ const TripForm = ({ onSubmit }) => {
           <button
             type="button"
             onClick={() => handleDaysChange(1)}
-            className="trip-form__btn-days trip-form__btn-days--increase"
+            className="trip-form__btn-days"
           >
             +
           </button>
@@ -145,7 +148,7 @@ const TripForm = ({ onSubmit }) => {
         </select>
       </div>
 
-      <button type="submit" className="trip-form__submit">
+      <button type="submit" className="trip-form__btn-submit">
         Generate Packing List
       </button>
     </form>

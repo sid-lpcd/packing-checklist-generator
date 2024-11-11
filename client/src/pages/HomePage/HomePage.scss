@@ -1,0 +1,11 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.main {
+  padding: calc($min-padding * 3);
+  max-width: 1200px;
+  margin: 0 auto;
+
+  &__title {
+  }
+}

@@ -17,6 +17,7 @@ textarea,
 
 body.dark-mode {
   @include dark-mode;
+  box-shadow: none;
 }
 
 /**************** Default Padding Wrapper ******************/
