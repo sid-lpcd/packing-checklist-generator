@@ -24,24 +24,28 @@ jobs:
         with:
           node-version: "18"
 
+      # Install dependencies for both client and server
       - name: Install dependencies for client and server
         run: |
-          # Install dependencies for client
           cd client
-          npm install
-          # Install dependencies for server
+          npm install   # This installs client-side dependencies
           cd ../server
-          npm install
+          npm install   # This installs server-side dependencies
 
+      # Ensure Vite is available before building
+      - name: Install Vite globally
+        run: |
+          npm install -g vite
+
+      # Build client and server (this step will wait until the previous steps are done)
       - name: Build client and server
         run: |
-          # Build the client app
           cd client
-          npm run build
-          # Build the server app (if necessary)
+          npm run build   # Build the client app
           cd ../server
-          npm run build
+          npm run build   # Build the server app (if needed)
 
+      # Upload the build artifacts for later use
       - name: Upload build artifacts
         uses: actions/upload-artifact@v3
         with:
