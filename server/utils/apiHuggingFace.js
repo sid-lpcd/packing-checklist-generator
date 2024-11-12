@@ -8,6 +8,34 @@ const API_URL =
   "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct/v1/chat/completions";
 const API_KEY = process.env.HUGGINGFACE_API_KEY;
 
+const cleanResponse = (generatedText) => {
+  const lines = generatedText
+    .split("\n")
+    .filter(
+      (item) => item.trim() && !item.toLowerCase().includes("packing list")
+    );
+  const packingList = [];
+  let currentCategory = null;
+
+  lines.forEach((line) => {
+    line = line.trim();
+
+    // Check for category lines (starting with "**")
+    if (line.startsWith("**")) {
+      const categoryName = line.replace(/\*\*/g, "").trim();
+      currentCategory = { name: categoryName, items: [] };
+      packingList.push(currentCategory);
+    }
+    // Check for item lines (starting with "*") and add them to the current category
+    else if (line.startsWith("*") && currentCategory) {
+      const item = line.replace(/^\*\s*/, "").trim();
+      currentCategory.items.push(item);
+    }
+  });
+
+  return packingList;
+};
+
 export const generatePackingList = async (
   location,
   temperature,
@@ -45,11 +73,7 @@ export const generatePackingList = async (
       response.data.choices?.[0]?.message?.content ||
       "No packing list generated.";
 
-    const packingList = generatedText
-      .split("\n")
-      .filter(
-        (item) => item.trim() && !item.toLowerCase().includes("packing list")
-      );
+    const packingList = cleanResponse(generatedText);
 
     return packingList.length ? packingList : ["No packing list generated."];
   } catch (error) {

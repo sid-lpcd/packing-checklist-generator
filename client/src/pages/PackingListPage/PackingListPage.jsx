@@ -14,7 +14,7 @@ const PackingListPage = ({ isDarkMode }) => {
   return (
     <div>
       <h2>Your Packing List</h2>
-      <PackingList items={packingList} />
+      <PackingList category={packingList} />
       {/* <button onClick={onSave}>Save Packing List</button> */}
     </div>
   );
