@@ -1,10 +1,12 @@
 import "./TripForm.scss";
 import { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TripForm = ({ isDarkMode }) => {
   // temp loading bar - needs update once having database
   const [loading, setLoading] = useState(false);
+  const [packingList, setPackingList] = useState([]);
 
   const [suggestions, setSuggestions] = useState([]);
   const [tripDetails, setTripDetails] = useState({
@@ -12,6 +14,8 @@ const TripForm = ({ isDarkMode }) => {
     duration: 1,
     month: "",
   });
+
+  const navigate = useNavigate();
 
   const fetchSuggestions = async (query) => {
     if (query.length < 3) return;
@@ -63,8 +67,7 @@ const TripForm = ({ isDarkMode }) => {
         setLoading(false); // Stop loading
 
         // Navigate to another page and pass the data
-        history.push({
-          pathname: "/packing-list",
+        navigate("/packing-list", {
           state: { packingList: response.data.packingList }, // Pass data via state
         });
       }

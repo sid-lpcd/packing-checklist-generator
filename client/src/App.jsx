@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.scss";
 import HomePage from "./pages/HomePage/HomePage";
 import Header from "./components/Header/Header";
+import PackingListPage from "./pages/PackingListPage/PackingListPage";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,6 +37,10 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage isDarkMode={isDarkMode} />} />
+        <Route
+          path="/packing-list"
+          element={<PackingListPage isDarkMode={isDarkMode} />}
+        />
       </Routes>
     </>
   );

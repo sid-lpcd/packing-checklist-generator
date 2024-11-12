@@ -1,14 +1,15 @@
-import { useLocation } from "react";
+import { useLocation } from "react-router-dom";
 import PackingList from "../../components/PackingList/PackingList";
 import "./PackingListPage.scss";
 
-const PackingListPage = () => {
+const PackingListPage = ({ isDarkMode }) => {
   const location = useLocation();
   const { packingList } = location.state || {};
 
   if (!packingList) {
     return <p>No packing list data available.</p>;
   }
+  console.log(packingList);
 
   return (
     <div>

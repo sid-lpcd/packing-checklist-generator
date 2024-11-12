@@ -1,10 +1,10 @@
 import "./ListItem.scss";
 
-const ListItem = ({ itemName, onToggle }) => {
+const ListItem = ({ item, onToggle }) => {
   return (
-    <li onClick={() => onToggle(item.id)}>
-      <input type="checkbox" checked={item.packed} readOnly />
-      {itemName}
+    <li onClick={onToggle}>
+      <input type="checkbox" checked={item.isCrossed} readOnly />
+      {item.name}
     </li>
   );
 };
