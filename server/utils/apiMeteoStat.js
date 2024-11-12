@@ -93,8 +93,11 @@ export const getWeatherSummaryForLocation = async (
 ) => {
   try {
     const stationId = await getNearestStationId(latitude, longitude);
+
     const year = new Date().getFullYear() - 1; // Previous year for historical data
+
     const weatherData = await getMonthlyWeatherData(stationId, year, month);
+
     return weatherData;
   } catch (error) {
     return null;

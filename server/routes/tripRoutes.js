@@ -3,7 +3,7 @@ import { getSuggestions, getWeather } from "../utils/apiWeather.js";
 import { generatePackingList } from "../utils/apiHuggingFace.js";
 const router = express.Router();
 
-// POST /api/trips - Create a new trip and generate packing list
+// POST /api/trip - Create a new trip and generate packing list
 router.post("/", async (req, res) => {
   const { location, duration, month } = req.body;
 
@@ -24,8 +24,10 @@ router.post("/", async (req, res) => {
     // Return the generated packing list
     return res.status(201).json({ packingList });
   } catch (error) {
-    console.error("Error generating packing list:", error);
-    res.status(500).json({ error: "Failed to generate packing list" });
+    res.status(500).json({
+      error: "Failed to generate packing list",
+      error_message: error.message,
+    });
   }
 });
 

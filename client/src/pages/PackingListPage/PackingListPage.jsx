@@ -10,10 +10,6 @@ const PackingListPage = () => {
     return <p>No packing list data available.</p>;
   }
 
-  const handleSave = () => {
-    // logic to save the packing list
-  };
-
   return (
     <div>
       <h2>Your Packing List</h2>

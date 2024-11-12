@@ -58,7 +58,8 @@ const monthNameToNumber = (monthName) => {
     "November",
     "December",
   ];
-  return months.indexOf(monthName);
+  const monthIndex = months.indexOf(monthName);
+  return monthIndex < 10 ? `0${monthIndex}` : `${monthIndex}`;
 };
 
 // Fetch weather data from OpenWeatherMap API
@@ -86,7 +87,6 @@ export const getWeather = async (location, month) => {
       lon,
       monthNameToNumber(month)
     );
-
     return weatherSummary;
   } catch (error) {
     throw new Error("Unable to fetch weather data", error);

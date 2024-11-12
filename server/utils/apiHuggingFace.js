@@ -39,8 +39,7 @@ export const generatePackingList = async (
     });
 
     if (response.data.error) {
-      console.error("Error:", response.data.error);
-      return [];
+      throw new Error("AI API Error: ", response.data.error);
     }
     const generatedText =
       response.data.choices?.[0]?.message?.content ||
@@ -54,7 +53,6 @@ export const generatePackingList = async (
 
     return packingList.length ? packingList : ["No packing list generated."];
   } catch (error) {
-    console.error("API request error:", error);
-    return [];
+    throw error;
   }
 };
