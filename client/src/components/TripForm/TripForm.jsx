@@ -2,7 +2,10 @@ import "./TripForm.scss";
 import { useState } from "react";
 import axios from "axios";
 
-const TripForm = ({ onSubmit, isDarkMode }) => {
+const TripForm = ({ isDarkMode }) => {
+  // temp loading bar - needs update once having database
+  const [loading, setLoading] = useState(false);
+
   const [suggestions, setSuggestions] = useState([]);
   const [tripDetails, setTripDetails] = useState({
     location: "",
@@ -40,9 +43,29 @@ const TripForm = ({ onSubmit, isDarkMode }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(tripDetails);
+
+    setLoading(true); // Start loading
+
+    try {
+      const response = await axios.post("/api/trips", tripDetails);
+
+      // temp solution before databse implementation
+      if (response.status === 201) {
+        setPackingList(response.data.packingList);
+
+        setLoading(false); // Stop loading
+
+        // Navigate to another page and pass the data
+        history.push({
+          pathname: "/packing-list",
+          state: { packingList: response.data.packingList }, // Pass data via state
+        });
+      }
+    } catch (error) {
+      console.error("Error generating packing list:", error);
+    }
   };
 
   return (
@@ -147,8 +170,12 @@ const TripForm = ({ onSubmit, isDarkMode }) => {
         </select>
       </div>
 
-      <button type="submit" className="trip-form__btn-submit">
-        Generate Packing List
+      <button
+        type="submit"
+        className="trip-form__btn-submit"
+        disabled={loading}
+      >
+        {loading ? "Loading..." : "Generate Packing List"}
       </button>
     </form>
   );
