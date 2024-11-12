@@ -1,5 +1,6 @@
 import axios from "axios";
 import dotenv from "dotenv";
+import { getWeatherSummaryForLocation } from "./apiMeteoStat.js";
 
 dotenv.config();
 
@@ -41,7 +42,7 @@ export const getSuggestions = async (query) => {
   }
 };
 
-// Convert month name (string) to a number (0-11)
+// Convert month name (string) to a number (1-12)
 const monthNameToNumber = (monthName) => {
   const months = [
     "January",
@@ -60,61 +61,34 @@ const monthNameToNumber = (monthName) => {
   return months.indexOf(monthName);
 };
 
-// Summarize weather conditions from the descriptions
-const getWeatherSummary = (descriptions) => {
-  const weatherCount = {
-    sunny: 0,
-    rainy: 0,
-    cloudy: 0,
-    others: 0,
-  };
-
-  descriptions.forEach((desc) => {
-    if (desc.includes("clear")) weatherCount.sunny++;
-    else if (desc.includes("rain")) weatherCount.rainy++;
-    else if (desc.includes("cloud")) weatherCount.cloudy++;
-    else weatherCount.others++;
-  });
-
-  const total = descriptions.length;
-  return {
-    sunny: (weatherCount.sunny / total) * 100,
-    rainy: (weatherCount.rainy / total) * 100,
-    cloudy: (weatherCount.cloudy / total) * 100,
-    others: (weatherCount.others / total) * 100,
-  };
-};
-
 // Fetch weather data from OpenWeatherMap API
 export const getWeather = async (location, month) => {
-  const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${OPENWEATHER_API_KEY}&units=metric`;
-  const monthNum = monthNameToNumber(month);
   try {
-    const response = await axios.get(url);
-
-    if (response.cod !== "200") {
-      throw new Error("Error fetching weather data");
-    }
-
-    // Filter the weather data by month or return a general forecast
-    const weather = response.list.filter((forecast) => {
-      const forecastDate = new Date(forecast.dt * 1000);
-      return forecastDate.getMonth() === monthNum; // Check if forecast is for the desired month
-    });
-
-    const temperature =
-      weather.reduce((acc, current) => acc + current.main.temp, 0) /
-      weather.length; // Average temp
-
-    const weatherDescriptions = weather.map(
-      (forecast) => forecast.weather[0].description
+    const geoResponse = await axios.get(
+      `http://api.openweathermap.org/geo/1.0/direct`,
+      {
+        params: {
+          q: location,
+          limit: 1, // Get the top result for the location
+          appid: OPENWEATHER_API_KEY,
+        },
+      }
     );
 
-    const weatherSummary = getWeatherSummary(weatherDescriptions);
+    if (geoResponse.status !== 200 || geoResponse.data.length === 0) {
+      throw new Error("Failed to fetch geolocation data for the location.");
+    }
 
-    return { temperature, weatherSummary };
+    const { lat, lon } = geoResponse.data[0];
+
+    const weatherSummary = await getWeatherSummaryForLocation(
+      lat,
+      lon,
+      monthNameToNumber(month)
+    );
+
+    return weatherSummary;
   } catch (error) {
-    console.error("Error fetching weather:", error);
-    throw new Error("Unable to fetch weather data");
+    throw new Error("Unable to fetch weather data", error);
   }
 };

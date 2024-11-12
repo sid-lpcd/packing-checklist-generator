@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
 import tripRoutes from "./routes/tripRoutes.js";
 import listRoutes from "./routes/listRoutes.js";
 
@@ -10,6 +11,8 @@ const allowedOrigins =
     ? ["https://your-production-url.com"] //to be updated
     : ["http://localhost:5173"];
 app.use(cors({ origin: allowedOrigins }));
+
+app.use(express.json());
 
 app.use("/api/trip", tripRoutes);
 app.use("/api/list", listRoutes);
