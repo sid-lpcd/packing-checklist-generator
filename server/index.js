@@ -12,6 +12,7 @@ const allowedOrigins =
     : ["http://localhost:5173"];
 app.use(cors({ origin: allowedOrigins }));
 
+// this is a built in middleware function in Express. It parses incoming requests with JSON payloads
 app.use(express.json());
 
 app.use("/api/trip", tripRoutes);

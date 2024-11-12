@@ -35,7 +35,6 @@ export const generatePackingList = async (
     const response = await axios.post(API_URL, body, {
       headers: {
         Authorization: `Bearer ${API_KEY}`,
-        "Content-Type": "application/json",
       },
     });
 
