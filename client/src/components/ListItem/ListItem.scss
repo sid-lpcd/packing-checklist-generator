@@ -1,0 +1,18 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.item-list {
+  &__item {
+    @include flex(start);
+    padding: calc($min-padding/2);
+  }
+
+  &__label {
+    padding: calc($min-padding/2);
+
+    &--crossed{
+      text-decoration: line-through;
+      color: green;
+    }
+  }
+}

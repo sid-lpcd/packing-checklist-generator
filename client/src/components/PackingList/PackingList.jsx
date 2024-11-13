@@ -4,7 +4,6 @@ import "./PackingList.scss";
 import { v4 as uuidv4 } from "uuid";
 
 const PackingList = ({ category }) => {
-  console.log(category);
   const [categoryStates, setCategoryStates] = useState(
     category.map((category) => ({
       name: category.name,
@@ -33,11 +32,11 @@ const PackingList = ({ category }) => {
   };
 
   return (
-    <ul>
+    <ul className="category-list">
       {categoryStates.map((category) => (
-        <div key={category.id} className="category">
+        <div key={category.id} className="category-list__item">
           <h3>{category.name}</h3>
-          <ul>
+          <ul className="item-list">
             {category.items.map((item) => (
               <ListItem
                 key={item.id}

@@ -37,10 +37,7 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<HomePage isDarkMode={isDarkMode} />} />
-        <Route
-          path="/packing-list"
-          element={<PackingListPage isDarkMode={isDarkMode} />}
-        />
+        <Route path="/packing-list" element={<PackingListPage />} />
       </Routes>
     </>
   );
