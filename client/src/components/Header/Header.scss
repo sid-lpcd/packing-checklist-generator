@@ -22,6 +22,10 @@
     font-size: 1rem;
     padding: 0;
   }
+  &__link {
+    color: unset;
+    text-decoration: unset;
+  }
 
   &__user {
     @include flex(start);

@@ -1,10 +1,13 @@
+import { Link } from "react-router-dom";
 import "./Header.scss";
 
 const Header = ({ user, onLogout, isDarkMode, toggleTheme }) => {
   return (
     <header className={`header ${isDarkMode ? "dark" : ""}`}>
       <div className="header-container">
-        <h2 className="header__title">Packing List Generator</h2>
+        <Link to="/" className="header__link">
+          <h2 className="header__title">Packing List Generator</h2>
+        </Link>
         <div className="header__user">
           <div
             className={`header__toggle-container ${
