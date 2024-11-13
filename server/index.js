@@ -18,8 +18,8 @@ app.use(cors());
 // this is a built in middleware function in Express. It parses incoming requests with JSON payloads
 app.use(express.json());
 
-app.use("/api/trip", tripRoutes);
-app.use("/api/list", listRoutes);
+app.use("/packing-checklist-generator/api/trip", tripRoutes);
+app.use("/packing-checklist-generator/api/list", listRoutes);
 
 // Serve static files from React in production
 if (process.env.NODE_ENV === "production") {
