@@ -29,6 +29,10 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
+app.use("/", (req, res) => {
+  res.send("Hello World");
+});
+
 // Error-handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
