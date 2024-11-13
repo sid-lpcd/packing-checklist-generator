@@ -9,8 +9,11 @@ const app = express();
 const allowedOrigins =
   process.env.NODE_ENV === "production"
     ? ["https://your-production-url.com"] //to be updated
-    : ["http://localhost:5173"];
-app.use(cors({ origin: allowedOrigins }));
+    : null;
+if (allowedOrigins) {
+  app.use(cors({ origin: allowedOrigins }));
+}
+app.use(cors());
 
 // this is a built in middleware function in Express. It parses incoming requests with JSON payloads
 app.use(express.json());
