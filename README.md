@@ -1,11 +1,16 @@
 # Packing Checklist Generator
 
+Live Demo: [Packing List Generator](https://packing-checklist-generator.vercel.app/)
+
 An easy-to-use web app that generates a personalized packing checklist based on trip details such as location, duration, and climate. Users can check off items as they pack, save lists for future use, and view past packing lists.
 
 ## Features
 
-- Generate a packing list based on trip information (location, duration, climate)
+- Generate a packing list
+    - Based on trip information (location, duration, month)
+    - AI prompting
 - Check off items as they're packed
+To be implemented:
 - Save lists for future reference
 - Access previously saved packing lists
 
@@ -21,7 +26,6 @@ An easy-to-use web app that generates a personalized packing checklist based on 
   │   │   │   ├── TripForm.js
   │   │   │   ├── PackingList.js
   │   │   │   ├── ListItem.js
-  │   │   │   ├── SaveListButton.js
   │   │   │   └── ListHistory.js
   │   │   ├── pages
   │   │   │   ├── HomePage.js
@@ -48,13 +52,14 @@ An easy-to-use web app that generates a personalized packing checklist based on 
 
   ```
 
-## React Components
-
-- **TripForm**: Collects trip details
-- **PackingList**: Displays the generated packing list
-- **ListItem**: Represents each item in the packing list
-- **SaveListButton**: Saves the current packing list
-- **ListHistory**: Shows previously saved lists
+## Tech Stack
+- **Frontend:** React, SCSS for styling.
+- **Backend:** Node.js, Express.js.
+- **Database:** MySQL;
+- **External APIs:** Hugging Face, OpenWeather and MeteoStat.
+- **Deployment:** 
+  - Frontend on Vercel.
+  - Backend on Digital Ocean with Nginx as a reverse proxy and PM2 for process management.
 
 ## API Endpoints
 
@@ -88,3 +93,19 @@ Each `Trip` belongs to a `User`, each `PackingItem` belongs to a `Trip`, and eac
    cd server && npm run dev
    cd client && npm start
    ```
+## Deployment
+
+### Backend (Digital Ocean with Nginx)
+1. Configure Nginx to route requests to the Node server.
+2. Use PM2 to manage and keep the server running.
+
+### Frontend (Vercel)
+Deploy the frontend on Vercel for continuous integration and smooth updates.
+
+## Contributing
+Contributions are welcome! Please submit issues or pull requests.
+
+## License
+This project is licensed under the MIT License.
+
+Happy Travels with Packing Checklist Generator!
