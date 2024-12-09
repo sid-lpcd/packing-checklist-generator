@@ -21,14 +21,6 @@ app.use(express.json());
 app.use("/api/trip", tripRoutes);
 app.use("/api/list", listRoutes);
 
-// Serve static files from React in production
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(path.resolve(), "client/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(path.resolve(), "client/build", "index.html"));
-  });
-}
-
 app.use("/", (req, res) => {
   res.send("Hello World");
 });
