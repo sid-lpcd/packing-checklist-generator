@@ -22,6 +22,7 @@ app.use("/api/trip", tripRoutes);
 app.use("/api/list", listRoutes);
 
 app.use("/", (req, res) => {
+  console.log("Hello World");
   res.send("Hello World");
 });
 
