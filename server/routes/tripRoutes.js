@@ -34,6 +34,7 @@ router.post("/", async (req, res) => {
 // GET /api/trips/:tripId - Retrieve packing list for a specific trip
 router.get("s/:tripId", (req, res) => {
   const tripId = req.params.tripId;
+  console.log(tripId);
 
   // Logic to retrieve packing list for the given tripId
   // ... (Fetch packing list from database based on tripId)
