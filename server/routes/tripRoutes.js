@@ -38,7 +38,7 @@ router.get("s/:tripId", (req, res) => {
   // Logic to retrieve packing list for the given tripId
   // ... (Fetch packing list from database based on tripId)
 
-  res.json(packingList);
+  res.json("Packing list for trip " + tripId);
 });
 
 router.get("/location-suggestions", async (req, res) => {
