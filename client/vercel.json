@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "http://104.248.169.15/packing-checklist-generator/api/:path*"
-    }
-  ]
-}

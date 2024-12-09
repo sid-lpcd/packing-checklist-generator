@@ -20,8 +20,10 @@ const TripForm = ({ isDarkMode }) => {
   const fetchSuggestions = async (query) => {
     if (query.length < 3) return;
     try {
+      console.log(import.meta.env.VITE_API);
       const response = await axios.get(
-        `/api/trip/location-suggestions?query=${query}`
+        import.meta.env.VITE_API +
+          `/api/trip/location-suggestions?query=${query}`
       );
       setSuggestions(response.data);
     } catch (error) {
@@ -53,7 +55,10 @@ const TripForm = ({ isDarkMode }) => {
     setLoading(true); // Start loading
 
     try {
-      const response = await axios.post(`/api/trip`, tripDetails);
+      const response = await axios.post(
+        import.meta.env.VITE_API + `/api/trip`,
+        tripDetails
+      );
       console.log(response);
       // temp solution before databse implementation
       if (response.status === 201) {
